@@ -70,22 +70,22 @@
                     <div class="col-sm-6">
                         <h3>Already a customer</h3>
                         <p>Already have an acoount? Sign in now.</p>
-                        <form action="#" method="post">
+                        <form>
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Email">
+                            <input type="email" name="email" id="loginEmail" placeholder="Email">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password">
+                            <input type="password" name="password" id="loginPassword" placeholder="Password">
 
                             <div class="form-btns">
-                                <a href="#" class="forgot-pass">Forgot Password?</a>
-                                <a href="#" class="hh-btn login-btn">Login</a>
+                                <a id='fogtBtn' class="forgot-pass">Forgot Password?</a>
+                                <a id='loginBtn' class="hh-btn login-btn">Login</a>
                             </div>
                         </form>
                     </div>
                     <div class="col-sm-6">
                         <h3>Register an account</h3>
                         <p>Don't have an accout? Register now for personalized settings and for quick checkout.</p>
-                        <form action="#" method="post">
+                        <form>
                             <label for="password">First Name</label>
                             <input type="text" name="first_name" id="first_name" placeholder="First Name">
                             <label for="password">Last Name</label>
@@ -100,7 +100,7 @@
                             <input type="password" name="c_password" id="c_password" placeholder="Confirm Password">
 
                             <div class="form-reg-btns">
-                                <a href="#" class="hh-btn register-btn">Register</a>
+                                <a id='signUp' class="hh-btn register-btn">Register</a>
                             </div>
                         </form>
                     </div>
@@ -108,6 +108,13 @@
             </div>
         </div>
     </div>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

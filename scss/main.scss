@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+$primary-color: #ff005c;
+$secondary-color: #26001b;
+$dark-color: #810034;
+$white-color: #fff;
+$transition: all 0.55s ease;
+
+.hh-btn {
+    background: $secondary-color;
+    padding: 0.5em 1em;
+    min-width: 50%;
+    border-radius: 5px;
+    border: none;
+    transition: $transition;
+    color: $white-color;
+    font-weight: 500;
+    text-align: center;
+
+    &:hover {
+        transform: scale(0.98);
+        transition: $transition;
+        color: $white-color;
+    }
+}
+
+#hh_nav {
+    background-color: $secondary-color;
+    
+    .navbar-nav {
+        li {
+            margin-right: 15px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                color: $white-color;
+                transition: $transition;
+
+                &:hover {
+                    color: $primary-color;
+                    transition: $transition;
+                }
+            }
+        }
+    }
+}
+
+#page_header {
+    .hh-main-nav {
+        margin: 0 1em;
+        border-top: 1px double #eee;
+        border-bottom: 1px double #eee;
+
+        .navbar-nav {
+            li {
+                border-right: 1px solid #eee;
+
+                &:last-child {
+                    border-right: 0;
+                }
+
+                a {
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+}
+
+.hh-logo {
+    text-align: center;
+    padding: 1.5em 0.5em;
+    
+    h2 {
+        font-weight: 900;
+        text-transform: uppercase;
+        color: $secondary-color;
+        margin: 0;
+
+        span {
+            color: $primary-color;
+            font-weight: 400;
+        }
+    }
+}
+
+.qty-btns {
+    margin: 1em 0;
+
+    button {
+        background-color: $dark-color;
+        border: 0;
+        width: 35px;
+        height: 35px;
+        color: $white-color;
+    }
+
+    input {
+        height: 35px;
+        width: 50px;
+        text-align: center;
+        border-radius: 0;
+        border: 1px solid #b3b3b3;
+    }
+}
+
+
+@import 'resettingTags';
+@import 'home';
+@import 'shopItems';
+@import 'login';

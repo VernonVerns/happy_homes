@@ -1,0 +1,60 @@
+#hh_login {
+    width: 100vw;
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    .content {
+        padding: 0.5em;
+
+        form {
+            padding: 0 1em;
+
+            input {
+                display: block;
+                width: 100%;
+                padding: 0.65em;
+                margin-bottom: 20px;
+                border: 1px solid #eee;
+                border-radius: 0;
+
+                &:focus {
+                    border-color: $secondary-color;
+                }
+            } 
+            
+            .form-btns {
+                margin-top: 20px;
+                display: grid;
+                grid-template-columns: auto auto;
+                align-items: center;
+
+                a {
+                    display: inline-block;
+
+                    &.forgot-pass {
+                        color: $primary-color;
+                    }
+
+                    &.login-btn {
+                        justify-self: flex-end;
+                    }
+                }
+            }
+
+            .form-reg-btns {
+                margin-top: 40px;
+                display: grid;
+                grid-template-columns: auto;
+                align-items: center;
+                a {
+                    display: inline-block;
+
+                    &.register-btn {
+                        justify-self: center;
+                    }
+                }
+                
+            }
+        }
+    }
+}

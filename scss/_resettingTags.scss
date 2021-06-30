@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+html, body {
+    font-weight: 400;
+    background-color: $white-color !important;
+    font-size: 16px;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none !important;
+    transition: $transition;
+    outline: none !important;
+
+    &:hover {
+        transition: $transition;
+        
+    }
+}
+
+input,
+select,
+textarea {
+    outline: none;
+}
+
+button {
+    outline: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f2f2f2; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $secondary-color; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {	
+    background: #555; 
+}

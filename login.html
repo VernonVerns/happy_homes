@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in / Register</title>
+    <link rel="stylesheet" href="./scss/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/themify-icons.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md" id="hh_nav">
+        <form class="form-inline" action="/action_page.php">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-success" type="submit"><i class="ti ti-search"></i></button>
+        </form>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html"><i class="ti ti-user"></i> Login / Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="ti ti-shopping-cart"></i> Cart (4)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="ti ti-shopping-cart-full"></i> Checkout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page_header">
+        <div class="hh-logo">
+            <h2>Happy <span>Homes</span></h2>
+        </div>
+        <nav class="navbar navbar-expand-md hh-main-nav">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="hh_login">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Already a customer</h3>
+                        <p>Already have an acoount? Sign in now.</p>
+                        <form action="#" method="post">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Email">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Password">
+
+                            <div class="form-btns">
+                                <a href="#" class="forgot-pass">Forgot Password?</a>
+                                <a href="#" class="hh-btn login-btn">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Register an account</h3>
+                        <p>Don't have an accout? Register now for personalized settings and for quick checkout.</p>
+                        <form action="#" method="post">
+                            <label for="password">First Name</label>
+                            <input type="text" name="first_name" id="first_name" placeholder="First Name">
+                            <label for="password">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+                            <label for="email">Email Address</label>
+                            <input type="email" name="email" id="email" placeholder="Email">
+                            <label for="password">Cell Number</label>
+                            <input type="number" name="phone" id="phone" placeholder="Cell Number">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Password">
+                            <label for="password">Confirm Password</label>
+                            <input type="password" name="c_password" id="c_password" placeholder="Confirm Password">
+
+                            <div class="form-reg-btns">
+                                <a href="#" class="hh-btn register-btn">Register</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

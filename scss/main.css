@@ -1,0 +1,402 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+.hh-btn {
+  background: #26001b;
+  padding: 0.5em 1em;
+  min-width: 50%;
+  border-radius: 5px;
+  border: none;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+}
+
+.hh-btn:hover {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+  color: #fff;
+}
+
+#hh_nav {
+  background-color: #26001b;
+}
+
+#hh_nav .navbar-nav li {
+  margin-right: 15px;
+}
+
+#hh_nav .navbar-nav li:last-child {
+  margin-right: 0;
+}
+
+#hh_nav .navbar-nav li a {
+  color: #fff;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#hh_nav .navbar-nav li a:hover {
+  color: #ff005c;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#page_header .hh-main-nav {
+  margin: 0 1em;
+  border-top: 1px double #eee;
+  border-bottom: 1px double #eee;
+}
+
+#page_header .hh-main-nav .navbar-nav li {
+  border-right: 1px solid #eee;
+}
+
+#page_header .hh-main-nav .navbar-nav li:last-child {
+  border-right: 0;
+}
+
+#page_header .hh-main-nav .navbar-nav li a {
+  color: #26001b;
+}
+
+.hh-logo {
+  text-align: center;
+  padding: 1.5em 0.5em;
+}
+
+.hh-logo h2 {
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #26001b;
+  margin: 0;
+}
+
+.hh-logo h2 span {
+  color: #ff005c;
+  font-weight: 400;
+}
+
+.qty-btns {
+  margin: 1em 0;
+}
+
+.qty-btns button {
+  background-color: #810034;
+  border: 0;
+  width: 35px;
+  height: 35px;
+  color: #fff;
+}
+
+.qty-btns input {
+  height: 35px;
+  width: 50px;
+  text-align: center;
+  border-radius: 0;
+  border: 1px solid #b3b3b3;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+html, body {
+  font-weight: 400;
+  background-color: #fff !important;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none !important;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+  outline: none !important;
+}
+
+a:hover {
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+}
+
+button {
+  outline: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #26001b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#hh_home {
+  width: 100vw;
+  margin-top: 30px;
+}
+
+#hh_home .shop-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto auto;
+      grid-template-columns: auto auto auto auto;
+  grid-gap: 1em;
+}
+
+#hh_home .shop-list .list-item {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#hh_home .shop-list .list-item:hover {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#hh_home .shop-list .list-item i {
+  font-size: 100px;
+}
+
+#hh_home .shop-list .list-item h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#hh_shop_items {
+  margin: 3em 0;
+  width: 100vw;
+}
+
+#hh_shop_items .shop-banner {
+  height: 50vh;
+  width: 100vw;
+  background: linear-gradient(195deg, #ff005c, #26001b);
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 2em;
+}
+
+#hh_shop_items .shop-banner h1 {
+  color: white;
+  font-size: 90px;
+}
+
+#hh_shop_items .shop-items-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[4];
+      grid-template-columns: repeat(4, auto);
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  grid-gap: 1.5em;
+}
+
+#hh_shop_items .shop-items-list .list-item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0.5em;
+  text-align: center;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#hh_shop_items .shop-items-list .list-item:hover {
+  border-color: #ff005c;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#hh_shop_items .shop-items-list .list-item .item-image {
+  height: 30vh;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#hh_shop_items .shop-items-list .list-item .item-image i {
+  font-size: 70px;
+  color: #b3b3b3;
+}
+
+#hh_shop_items .shop-items-list .list-item .item-name {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #26001b;
+}
+
+#hh_shop_items .shop-items-list .list-item .item-desc {
+  margin: 0;
+  padding: 0;
+  color: #b3b3b3;
+}
+
+#hh_shop_items .shop-items-list .list-item .item-price {
+  color: #ff005c;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+#hh_shop_items .shop-items-list .list-item .add-to-cart {
+  display: block;
+  width: 100%;
+}
+
+#hh_item_preview {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+#hh_item_preview .item-image {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ff005c;
+  height: 50vh;
+}
+
+#hh_item_preview .item-image img {
+  width: 100%;
+}
+
+#hh_item_preview .item-image i {
+  font-size: 120px;
+}
+
+#hh_item_preview .item-name {
+  font-size: clamp(18px, 5vw, 30px);
+  font-weight: 700;
+}
+
+#hh_item_preview .item-desc {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: #b3b3b3;
+}
+
+#hh_login {
+  width: 100vw;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+#hh_login .content {
+  padding: 0.5em;
+}
+
+#hh_login .content form {
+  padding: 0 1em;
+}
+
+#hh_login .content form input {
+  display: block;
+  width: 100%;
+  padding: 0.65em;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 0;
+}
+
+#hh_login .content form input:focus {
+  border-color: #26001b;
+}
+
+#hh_login .content form .form-btns {
+  margin-top: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#hh_login .content form .form-btns a {
+  display: inline-block;
+}
+
+#hh_login .content form .form-btns a.forgot-pass {
+  color: #ff005c;
+}
+
+#hh_login .content form .form-btns a.login-btn {
+  justify-self: flex-end;
+}
+
+#hh_login .content form .form-reg-btns {
+  margin-top: 40px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#hh_login .content form .form-reg-btns a {
+  display: inline-block;
+}
+
+#hh_login .content form .form-reg-btns a.register-btn {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+/*# sourceMappingURL=main.css.map */

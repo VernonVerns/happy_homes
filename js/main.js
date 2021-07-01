@@ -13,6 +13,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
+const storage = firebase.storage();
+const storageRef = storage.ref();
 const UsersRef = db.collection('Users');
 const ShopsRef = db.collection('Shops');
 const OrdersRef = db.collection('Orders');
@@ -49,12 +51,12 @@ window.onload = function () {
 //                                                     Home Page
 // =====================================================================================================================
 function loadHome() {
-    $('.shop-list').off('click').on('click', '.list-item', function(){
+    $('.shop-list').off('click').on('click', '.list-item', function () {
         const id = $(this).find('p').text()
         sessionStorage.setItem('shop', id)
         window.location.replace('./items.html')
     });
-    
+
     ShopsRef.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let shop = doc.data();
@@ -67,30 +69,30 @@ function loadHome() {
             $('.shop-list').append(shopHtml)
         });
     })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
 }
 // =====================================================================================================================
 //                                                     Shop Page
 // =====================================================================================================================
 function loadShop() {
     shop = JSON.parse(sessionStorage.getItem('shop'));
-    if(shop == null){
+    if (shop == null) {
         window.location.replace('./index.html');
     }
-    $('.shop-items-list').off('click').on('click', '.list-item', function(){
+    $('.shop-items-list').off('click').on('click', '.list-item', function () {
         let item = $(this).find('#item-id').text();
         sessionStorage.setItem('item', item)
         window.location.href = './preview.html'
     });
 
     ShopsRef.doc(shop.id).collection('Catalogue')
-    .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            let item = doc.data();
-            item.id = doc.id
-            itemHtml = `<a class="list-item"">
+        .get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                let item = doc.data();
+                item.id = doc.id
+                itemHtml = `<a class="list-item"">
                             <div class="item-image">
                                 <i class="ti ti-image"></i>
                             </div>
@@ -100,18 +102,18 @@ function loadShop() {
                             <p id="item-id" hidden>${JSON.stringify(item)}</p>
                             <button type="button" class="hh-btn add-to-cart"><i class="ti ti-shopping-cart"></i></button>
                         </a>`;
-            $('.shop-items-list').append(itemHtml);
+                $('.shop-items-list').append(itemHtml);
+            });
+        }).catch((err) => {
+            console.log(err);
         });
-    }).catch((err) => {
-        console.log(err);
-    });
 }
 // =====================================================================================================================
 //                                                     Preview Page
 // =====================================================================================================================
 function loadPreview() {
     let item = JSON.parse(sessionStorage.getItem('item'));
-    if(item == null){
+    if (item == null) {
         window.location.replace('./items.html');
     }
     $('#hh_item_preview .item-name').text(item.name)
@@ -242,11 +244,22 @@ function showErr(title, msg) {
 }
 
 function loader(start) {
-    if(start){
-        $("body").addClass("loading"); 
-    }else{
+    if (start) {
+        $("body").addClass("loading");
+    } else {
         $("body").removeClass("loading");
     }
+}
+
+function getShopLogoTo(shop, imgId) {
+    storageRef.child(`${shop}/logo.jpg`).getDownloadURL()
+        .then((url) => {
+            var img = document.getElementById(imgId);
+            img.setAttribute('src', url);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
 firebase.auth().onAuthStateChanged((user) => {

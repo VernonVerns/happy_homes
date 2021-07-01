@@ -49,19 +49,74 @@ window.onload = function () {
 //                                                     Home Page
 // =====================================================================================================================
 function loadHome() {
-    console.log(`Current File Name Is ${page}`)
+    $('.shop-list').off('click').on('click', '.list-item', function(){
+        const id = $(this).find('p').text()
+        sessionStorage.setItem('shop', id)
+        window.location.replace('./items.html')
+    });
+    
+    ShopsRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let shop = doc.data();
+            shop.id = doc.id;
+            shopHtml = `<a class="list-item"">
+                            <i class="ti ti-image"></i>
+                            <h3>${shop.name}</h3>
+                            <p hidden>${JSON.stringify(shop)}</p>
+                        </a>`
+            $('.shop-list').append(shopHtml)
+        });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
 }
 // =====================================================================================================================
 //                                                     Shop Page
 // =====================================================================================================================
 function loadShop() {
-    console.log(`Current File Name Is ${page}`)
+    shop = JSON.parse(sessionStorage.getItem('shop'));
+    if(shop == null){
+        window.location.replace('./index.html');
+    }
+    $('.shop-items-list').off('click').on('click', '.list-item', function(){
+        let item = $(this).find('#item-id').text();
+        sessionStorage.setItem('item', item)
+        window.location.href = './preview.html'
+    });
+
+    ShopsRef.doc(shop.id).collection('Catalogue')
+    .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let item = doc.data();
+            item.id = doc.id
+            itemHtml = `<a class="list-item"">
+                            <div class="item-image">
+                                <i class="ti ti-image"></i>
+                            </div>
+                            <h3 class="item-name">${item.name}</h3>
+                            <p class="item-desc">${item.desc}</p>
+                            <h2 class="item-price">R${item.price}</h2>
+                            <p id="item-id" hidden>${JSON.stringify(item)}</p>
+                            <button type="button" class="hh-btn add-to-cart"><i class="ti ti-shopping-cart"></i></button>
+                        </a>`;
+            $('.shop-items-list').append(itemHtml);
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 // =====================================================================================================================
 //                                                     Preview Page
 // =====================================================================================================================
 function loadPreview() {
-    console.log(`Current File Name Is ${page}`)
+    let item = JSON.parse(sessionStorage.getItem('item'));
+    if(item == null){
+        window.location.replace('./items.html');
+    }
+    $('#hh_item_preview .item-name').text(item.name)
+    $('#hh_item_preview .item-desc').text(item.desc)
+    $('#hh_item_preview .item-price').text(item.price)
 }
 // =====================================================================================================================
 //                                                     Cart Page
@@ -184,6 +239,14 @@ function isPassValid(pass) {
 
 function showErr(title, msg) {
     alert(`${title}: ${msg}`)
+}
+
+function loader(start) {
+    if(start){
+        $("body").addClass("loading"); 
+    }else{
+        $("body").removeClass("loading");
+    }
 }
 
 firebase.auth().onAuthStateChanged((user) => {

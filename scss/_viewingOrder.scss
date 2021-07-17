@@ -1,0 +1,104 @@
+#viewing_order {
+    padding: 1em;
+    
+    .page-nav {
+        height: 50px;
+
+        a {
+            font-size: 20px !important;
+        }
+    }
+
+    .headers {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: rgba(0,0,0,0.6);
+    }
+
+    .customer-details {
+        margin-bottom: 30px;
+
+        li {
+            font-size: 18px;
+            margin-bottom: 10px;
+
+            &:first-child {
+                font-weight: 700;
+            }
+
+            i {
+                margin-right: 10px;
+            }
+
+            a {
+                color: $secondary-color;
+            }
+        }
+    }
+
+    .list-by-shops {
+        .items-list {
+            margin-bottom: 20px;
+
+            .shop-name {
+                display: grid;
+                grid-template-columns: auto auto;
+                grid-template-rows: auto;
+                background-color: $secondary-color;
+                align-items: center;
+                padding-left: 1em;
+                padding-right: 0.5em;
+
+
+                h5 {
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: white;
+                }
+
+                button {
+                    justify-self: flex-end;
+                    font-size: 18px;
+                    font-weight: initial;
+                    border: 0;
+                    background-color: white;
+                }
+            }
+
+            ul {
+                margin-top: 10px;
+
+                li {
+                    font-size: 18px;
+                    margin-bottom: 10px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .close-order {
+        margin-top: 30px;
+
+        h3 {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        button {
+            border: 0;
+            background-color: $primary-color;
+            color: $white-color;
+            min-width: 50%;
+            padding: 0.8em 1em;
+        }
+    }
+}

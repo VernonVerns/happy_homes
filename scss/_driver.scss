@@ -1,0 +1,107 @@
+#driver_portal {
+    margin: 0;
+    padding: 0;
+
+    .header-page {
+        margin: 0;
+        padding: 0;
+        height: 30vh;
+        background: linear-gradient(-95deg, $secondary-color, $primary-color);
+        padding: 1em 1em 0 1em;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+
+        h2 {
+            font-size: 25px;
+            font-weight: 600;
+            color: white;
+            align-self: flex-end;
+
+            span {
+                font-weight: 300;
+            }
+
+            small {
+                display: block;
+                font-size: 14px;
+                color: rgba(255,255,255,0.7);
+            }
+        }
+
+        .driver-tabs {
+            align-self: flex-end;
+            
+            button {
+                border: 2px solid transparent;
+                background-color: transparent;
+                padding: 0.5em;
+                color: rgba(255,255,255,0.7);
+
+                &.active-tab {
+                    color: $white-color;
+                    border-bottom: 4px solid $white-color;
+                }
+
+                span {
+                    background-color: $secondary-color;
+                    color: $white-color;
+                    border-radius: 100px;
+                }
+            }
+        }
+    }
+
+    .delivery-list {
+        padding: 2em 0;
+
+        .delivery {
+            display: grid;
+            grid-template-columns: auto 20%;
+            grid-template-rows: auto;
+            padding-left: 1em;
+            margin-bottom: 15px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .details {
+                position: relative;
+                
+                h1 {
+                    font-size: 18px;
+                    font-weight: 600;
+    
+                    span {
+                        color: $primary-color;
+                    }
+                }
+
+                .time {
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                }
+
+                .about-items {
+                    margin-top: 15px;
+
+                    li {
+                        font-size: 16px;
+                        i {
+                            color: #b3b3b3;
+                            margin-right: 8px;
+                        }
+                    }
+                }
+            }
+
+            button {
+                border: 0;
+                background-color: $secondary-color;
+                color: $white-color;
+            }
+        }
+    }
+}

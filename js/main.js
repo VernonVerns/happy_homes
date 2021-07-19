@@ -10,16 +10,25 @@ const firebaseConfig = {
 // =====================================================================================================================
 //                                                     Global Variables
 // =====================================================================================================================
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
-const storageRef = storage.ref();
-const UsersRef = db.collection('Users');
-const ShopsRef = db.collection('Shops');
-const OrdersRef = db.collection('Orders');
+let db = null;
+let auth = null;
+let storage = null;
+let storageRef = null;
+let UsersRef = null;
+let ShopsRef = null;
+let OrdersRef = null;
 
-window.onload = function () {
+loadFirebaseScripts()
+
+function initialise() {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    auth = firebase.auth();
+    storage = firebase.storage();
+    storageRef = storage.ref();
+    UsersRef = db.collection('Users');
+    ShopsRef = db.collection('Shops');
+    OrdersRef = db.collection('Orders');
     if (localStorage.getItem("curOrder") != null) {
         curOrder = localStorage.getItem("curOrder");
     }
@@ -29,6 +38,15 @@ window.onload = function () {
     switch (page) {
         case "index.html":
             loadHome();
+            break;
+        case "shops.html":
+            loadShops();
+            break;
+        case "driverPage.html":
+            loadDriver();
+            break;
+        case "packerPage.html":
+            loadPacker();
             break;
         case "items.html":
             loadShop();
@@ -46,11 +64,17 @@ window.onload = function () {
             window.location.href = "index.html";
             break;
     }
+    
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            user = user;
+        }
+    });
 }
 // =====================================================================================================================
 //                                                     Home Page
 // =====================================================================================================================
-function loadHome() {
+function loadShops() {
     $('.shop-list').off('click').on('click', '.list-item', function () {
         const id = $(this).find('p').text()
         sessionStorage.setItem('shop', id)
@@ -262,8 +286,44 @@ function getShopLogoTo(shop, imgId) {
         });
 }
 
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        user = user;
-    }
-});
+function loadSriptMap() {
+    var script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCjruLQSZNI2_2zYo_q3HgVzhEXvVeiyhg&callback=initMap';
+    script.async = true;
+
+    window.initMap = function() {
+        console.log('Initialised Maps');
+    };
+
+    document.head.appendChild(script);
+}
+
+function loadFirebaseScripts() {
+    var scripts = ["https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"
+                    ,'https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js'
+                    ,'https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js'
+                    ,'https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js'
+                ]
+    loadScripts(scripts, initialise)
+}
+
+function loadScripts(array,callback){  
+    var loader = function(src,handler){  
+        var script = document.createElement("script");  
+        script.src = src;  
+        script.onload = script.onreadystatechange = function(){  
+          script.onreadystatechange = script.onload = null;  
+          if(/MSIE ([6-9]+\.\d+);/.test(navigator.userAgent))window.setTimeout(function(){handler();},8,this);  
+          else handler();  
+        }  
+        var head = document.getElementsByTagName("head")[0];  
+        (head || document.body).appendChild( script );  
+    };  
+    (function(){  
+        if(array.length!=0){  
+                loader(array.shift(),arguments.callee);  
+        }else{  
+                callback && callback();  
+        }  
+    })();  
+} 

@@ -10,13 +10,15 @@ const firebaseConfig = {
 // =====================================================================================================================
 //                                                     Global Variables
 // =====================================================================================================================
-let db = null;
-let auth = null;
-let storage = null;
-let storageRef = null;
-let UsersRef = null;
-let ShopsRef = null;
-let OrdersRef = null;
+var db = null;
+var auth = null;
+var storage = null;
+var storageRef = null;
+var UsersRef = null;
+var ShopsRef = null;
+var OrdersRef = null;
+var curOrder = null;
+var curUser = null
 
 loadFirebaseScripts()
 
@@ -31,6 +33,8 @@ function initialise() {
     OrdersRef = db.collection('Orders');
     if (localStorage.getItem("curOrder") != null) {
         curOrder = localStorage.getItem("curOrder");
+    }else{
+        curOrder = []
     }
 
     var url = window.location.href.split("/");
@@ -67,7 +71,7 @@ function initialise() {
     
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            user = user;
+            curUser = user;
         }
     });
 }
@@ -143,6 +147,33 @@ function loadPreview() {
     $('#hh_item_preview .item-name').text(item.name)
     $('#hh_item_preview .item-desc').text(item.desc)
     $('#hh_item_preview .item-price').text(item.price)
+
+    $('.qty-btns').off('click').on('click', 'button', function(){
+        let btn = $(this).text();
+        let qty = $(this).closest('.qty-btns').find('input').val();
+        if (btn == '+'){
+            qty++
+        }else{
+            qty--
+        }
+        $(this).closest('.qty-btns').find('input').val(qty);
+    });
+
+    $('#item-to-cart').off('click').on('click', function(){
+        console.log(curUser);
+        if (curUser) {
+            index = containsObject(item, curOrder);
+            if (typeof index == "boolean") {
+                item.qty = $('.qty-btns').find('input').val();
+                curOrder.push(item);
+            } else {
+                curOrder[index].qty = $('.qty-btns').find('input').val();
+            }
+            console.log(curOrder);
+        }else{
+            window.location.href = './login.html';
+        }
+    });
 }
 // =====================================================================================================================
 //                                                     Cart Page
@@ -166,6 +197,9 @@ function loadPacker() {
 //                                                     Login Page
 // =====================================================================================================================
 function loadLogin() {
+    if (curUser) {
+        window.history.back()
+    }
     $('#loginBtn').off('click').on('click', function () {
         login()
     });
@@ -285,6 +319,16 @@ function loader(start) {
     } else {
         $("body").removeClass("loading");
     }
+}
+
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return i;
+        }
+    }
+    return false;
 }
 
 function getShopLogoTo(shop, imgId) {

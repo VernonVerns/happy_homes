@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewing cart - Happy Homes</title>
+    <link rel="stylesheet" href="./scss/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/themify-icons.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md" id="hh_nav">
+        <form class="form-inline" action="/action_page.php">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-success" type="submit"><i class="ti ti-search"></i></button>
+        </form>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html"><i class="ti ti-user"></i> Login / Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="ti ti-shopping-cart"></i> Cart (4)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="ti ti-shopping-cart-full"></i> Checkout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page_header">
+        <div class="hh-logo">
+            <h2>Happy <span>Homes</span></h2>
+        </div>
+        <nav class="navbar navbar-expand-md hh-main-nav">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./shops.html">Shopping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./driverPage.html">Drivers' Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./packerPage.html">Packers' Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="cart_items">
+        <div class="hh-container">
+            <div class="cart-table">
+                <div class="table-head tb-row">
+                    <div class="tb-item">Item Name</div>
+                    <div class="tb-item">Unit Price</div>
+                    <div class="tb-item">Quantity</div>
+                    <div class="tb-item">Row Total</div>
+                </div>
+
+                <!-- Items of the table start here -->
+                <div class="tb-row">
+                    <div class="item-name tb-item">
+                        <div class="img-container"><img src="./img/bg_image.jpg" alt=""></div>
+                        <p>Island 5,128km square, East of Madagascar + free ship 123.4m (26 Guests in cabins) built
+                            2008.
+                        </p>
+                    </div>
+                    <div class="tb-item">
+                        <p class="unit-price">R834,000,000,000.00</p>
+                    </div>
+                    <div class="tb-item">
+                        <div class="qty-btns">
+                            <button class="decrease-qty">&minus;</button>
+                            <input type="number" name="quantity" id="" min="1" value="1">
+                            <button class="increase-qty">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="tb-item">
+                        <h4 class="row-total">R834,000,000,000.00</h4>
+                    </div>
+                </div>
+
+                <div class="tb-row">
+                    <div class="item-name tb-item">
+                        <div class="img-container"><img src="./img/bg_image.jpg" alt=""></div>
+                        <p>Something you can buy. I don't know what it is, but I am sure you will need it ;). Plus its
+                            cheap, you can afford it.
+                        </p>
+                    </div>
+                    <div class="tb-item">
+                        <p class="unit-price">R182.50</p>
+                    </div>
+                    <div class="tb-item">
+                        <div class="qty-btns">
+                            <button class="decrease-qty">&minus;</button>
+                            <input type="number" name="quantity" id="" min="1" value="2">
+                            <button class="increase-qty">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="tb-item">
+                        <h4 class="row-total">R365.00</h4>
+                    </div>
+                </div>
+
+                <!-- This row is for the total of item in are in there cart -->
+                <div class="tb-row total-items">
+                    <div class="tb-item"></div>
+                    <div class="tb-item">Total items</div>
+                    <div class="tb-item">3 items</div>
+                    <div class="tb-item"></div>
+                </div>
+
+                <!-- This row is for the sub-total before discounts -->
+                <div class="tb-row sub-total-price">
+                    <div class="tb-item sub-total">Sub Total</div>
+                    <div class="tb-item">
+                        <h3 class="price">R834,000,000,365.00</h3>
+                    </div>
+                </div>
+
+                <!-- This row is the total price of the items after discounts -->
+                <div class="tb-row total-price">
+                    <div class="tb-item total">Total</div>
+                    <div class="tb-item">
+                        <h3 class="price">R834,000,000,365.00</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- these are the buttons to checkout or continue shopping -->
+            <div class="checkout-btns">
+                <a href="./shops.html" class="shopping w3-card">Continue Shopping</a>
+                <a href="./shops.html" class="checkout w3-card">Checkout</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

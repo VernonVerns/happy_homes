@@ -1,0 +1,146 @@
+#cart_items {
+    margin-top: 30px;
+
+    .hh-container {
+        padding: 1em 3em;
+
+        .cart-table {
+            width: 100%;
+            
+            .tb-row {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 55% repeat(3, 15%);
+                grid-template-rows: auto;
+                // align-items: center;
+                border-bottom: 1px solid #e6e6e6;
+    
+                &.table-head {
+                    background-color: $secondary-color;
+                    color: $white-color !important;
+                    border-bottom: 0;
+                }
+
+                &:last-child {
+                    border-bottom: 0;
+                }
+    
+                .tb-item {
+                    padding: 0.8em 0.8em;
+
+                    &.item-name {
+                        display: grid;
+                        grid-template-columns: 25% 75%;
+                        grid-template-rows: auto;
+                        
+
+                        .img-container {
+                            width: 100%;
+                            height: 150px;
+                            border: 1px solid #eee;
+                            padding: 0.5em;
+                            display: grid;
+                            justify-content: center;
+                            align-items: center;
+                            
+                            img {
+                                width: 100%;
+                            }
+                        }
+
+                        p {
+                            padding: 0 1em;
+                            color: #b3b3b3;
+                        }
+                    }
+
+                    .unit-price {
+                        color: #999;
+                        margin-top: 10px;
+                    }
+
+                    .row-total {
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: $primary-color;
+                        margin: 0;
+                        margin-top: 10px;
+                    }
+                }
+
+                &.sub-total-price {
+                    grid-template-columns: 70% 30%;
+                    align-items: center;
+
+                    .sub-total {
+                        font-size: 20px;
+                        font-weight: 600;
+                        text-align: right;
+                    }
+
+                    .price {
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin: 0;
+                        text-align: right;
+                    }
+                }
+
+                &.total-price {
+                    grid-template-columns: 70% 30%;
+                    align-items: center;
+
+                    .total {
+                        font-size: clamp(30px, 5vw, 22px);
+                        font-weight: 700;
+                        text-align: right;
+                    }
+
+                    .price {
+                        font-size: clamp(30px, 5vw, 22px);
+                        font-weight: 700;
+                        margin: 0;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        .checkout-btns {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: right;
+
+            a {
+                display: inline-block;
+                padding: 0.5em 1em;
+                margin-right: 20px;
+                min-width: 160px;
+                text-align: center;
+                border-radius: 10px;
+                font-weight: 600;
+                transition: $transition;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &:hover {
+                    transition: $transition;
+                    transform: scale(0.98);
+                }
+
+                &.shopping {
+                    background-color: #eee;
+                    color: $secondary-color;
+                }
+
+                &.checkout {
+                    background-color: $primary-color;
+                    border: 0;
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 .hh-btn {
   background: #26001b;
@@ -616,6 +617,181 @@ input[type=number]::-webkit-outer-spin-button {
   color: #fff;
 }
 
+#checkout_page {
+  margin-top: 30px;
+}
+
+#checkout_page .hh-container {
+  padding: 1em 3em;
+}
+
+#checkout_page .hh-container .nav-tabs {
+  border: 0;
+}
+
+#checkout_page .hh-container .nav-tabs .nav-item {
+  background-color: #26001b;
+  margin-right: 10px;
+  border-radius: 0;
+  border: 0;
+}
+
+#checkout_page .hh-container .nav-tabs .nav-item:last-child {
+  margin-right: 0;
+}
+
+#checkout_page .hh-container .nav-tabs .nav-item a {
+  color: #fff !important;
+  border-radius: 0;
+  border: 0;
+  position: relative;
+}
+
+#checkout_page .hh-container .nav-tabs .nav-item a.active {
+  background-color: #ff005c;
+}
+
+#checkout_page .hh-container .nav-tabs .nav-item a::after {
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  content: "✔";
+  font-size: 15px;
+  width: 20px;
+  height: 20px;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+  font-weight: normal;
+}
+
+#checkout_page .hh-container form {
+  padding: 0 1em;
+}
+
+#checkout_page .hh-container form input {
+  display: block;
+  width: 100%;
+  padding: 0.65em;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 0;
+}
+
+#checkout_page .hh-container form input:focus {
+  border-color: #26001b;
+}
+
+#checkout_page .hh-container form select {
+  display: block;
+  width: 100%;
+  padding: 0.65em;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 0;
+}
+
+#checkout_page .hh-container form select:focus {
+  border-color: #26001b;
+}
+
+#checkout_page .hh-container form textarea {
+  display: block;
+  width: 100%;
+  height: 200px;
+  resize: none;
+  padding: 0.65em;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 0;
+}
+
+#checkout_page .hh-container form textarea:focus {
+  border-color: #26001b;
+}
+
+#checkout_page .hh-container form .form-btns {
+  margin-top: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#checkout_page .hh-container form .form-btns a {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#checkout_page .hh-container form .form-btns a.forgot-pass {
+  color: #ff005c;
+}
+
+#checkout_page .hh-container form .form-btns a.login-btn {
+  justify-self: flex-end;
+  color: #fff;
+}
+
+#checkout_page .hh-container #login_page {
+  margin-top: 30px;
+}
+
+#checkout_page .hh-container #login_page h1 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+#checkout_page .hh-container #address {
+  margin-top: 30px;
+  padding-bottom: 50px;
+}
+
+#checkout_page .hh-container #address h1 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+#checkout_page .hh-container #address .hh-btn {
+  margin-top: 30px;
+  min-width: 30%;
+}
+
+#checkout_page .hh-container #instructions {
+  margin-top: 30px;
+}
+
+#checkout_page .hh-container #instructions h1 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+#checkout_page .hh-container #instructions .hh-btn {
+  margin-top: 30px;
+  min-width: 30%;
+}
+
+#checkout_page .hh-container #payment {
+  margin-top: 30px;
+}
+
+#checkout_page .hh-container #payment h1 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+#checkout_page .hh-container #review {
+  margin-top: 30px;
+}
+
+#checkout_page .hh-container #review h1 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
 #driver_portal {
   margin: 0;
   padding: 0;
@@ -1014,6 +1190,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #hh_login .content form .form-btns a {
   display: inline-block;
+  cursor: pointer;
 }
 
 #hh_login .content form .form-btns a.forgot-pass {

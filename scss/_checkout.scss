@@ -1,0 +1,170 @@
+#checkout_page {
+    margin-top: 30px;
+
+    .hh-container {
+        padding: 1em 3em;
+
+        .nav-tabs {
+            border: 0;
+
+            .nav-item {
+                background-color: $secondary-color;
+                margin-right: 10px;
+                border-radius: 0;
+                border: 0;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                a {
+                    color: $white-color !important;
+                    border-radius: 0;
+                    border: 0;
+                    position: relative;
+
+                    &.active {
+                        background-color: $primary-color;
+                    }
+
+                    &::after {   
+                        display: block;
+                        position: absolute;
+                        right: 10px;
+                        top: 8px;
+                        content: "✔";
+                        font-size: 15px;
+                        width: 20px;
+                        height: 20px;
+                        line-height: 22px;
+                        text-align: center;
+                        color: $white-color;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+
+        form {
+            padding: 0 1em;
+
+            input {
+                display: block;
+                width: 100%;
+                padding: 0.65em;
+                margin-bottom: 20px;
+                border: 1px solid #eee;
+                border-radius: 0;
+
+                &:focus {
+                    border-color: $secondary-color;
+                }
+            }
+            
+            select {
+                display: block;
+                width: 100%;
+                padding: 0.65em;
+                margin-bottom: 20px;
+                border: 1px solid #eee;
+                border-radius: 0; 
+
+                &:focus {
+                    border-color: $secondary-color;
+                }
+            }
+
+            textarea {
+                display: block;
+                width: 100%;
+                height: 200px;
+                resize: none;
+                padding: 0.65em;
+                margin-bottom: 20px;
+                border: 1px solid #eee;
+                border-radius: 0; 
+
+                &:focus {
+                    border-color: $secondary-color;
+                }
+            }
+            
+            .form-btns {
+                margin-top: 20px;
+                display: grid;
+                grid-template-columns: auto auto;
+                align-items: center;
+
+                a {
+                    display: inline-block;
+                    cursor: pointer;
+
+                    &.forgot-pass {
+                        color: $primary-color;
+                    }
+
+                    &.login-btn {
+                        justify-self: flex-end;
+                        color: $white-color;
+                    }
+                }
+            }
+        }
+
+        #login_page {
+            margin-top: 30px;
+
+            h1 {
+                font-size: 25px;
+                margin-bottom: 20px;
+            }
+        }
+
+        #address {
+            margin-top: 30px;
+            padding-bottom: 50px;
+
+             h1 {
+                font-size: 25px;
+                margin-bottom: 20px;
+            }
+
+            .hh-btn {
+                margin-top: 30px;
+                min-width: 30%;
+            }
+        }
+
+        #instructions {
+            margin-top: 30px;
+
+            h1 {
+                font-size: 25px;
+                margin-bottom: 20px;
+            }
+
+            .hh-btn {
+                margin-top: 30px;
+                min-width: 30%;
+            }
+        }
+
+        #payment {
+            margin-top: 30px;
+
+            h1 {
+                font-size: 25px;
+                margin-bottom: 20px;
+            }
+        }
+
+        #review {
+            margin-top: 30px;
+
+            h1 {
+                font-size: 25px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

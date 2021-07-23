@@ -32,7 +32,7 @@ function initialise() {
     ShopsRef = db.collection('Shops');
     OrdersRef = db.collection('Orders');
     if (localStorage.getItem("curOrder") != null) {
-        curOrder = localStorage.getItem("curOrder");
+        curOrder = JSON.parse(localStorage.getItem("curOrder"));
     }else{
         curOrder = []
     }
@@ -61,6 +61,12 @@ function initialise() {
         case "cart.html":
             loadCart();
             break;
+        case "cart.html":
+            loadCart();
+            break;
+        case "checkout.html":
+            loadCheckout();
+            break;
         case "login.html":
             loadLogin();
             break;
@@ -77,6 +83,22 @@ function initialise() {
 }
 // =====================================================================================================================
 //                                                     Home Page
+// =====================================================================================================================
+function loadHome() {
+    ShopsRef.get().then((querySnapshot)=>{
+        let numShops = querySnapshot.size;
+        let numItems = 0
+        querySnapshot.forEach((shop)=>{
+            shop.ref.collection('Catalogue').get().then((catalogue)=>{
+                numItems += catalogue.size;
+                $('#num-products').text(numItems);
+            });
+        });
+        $('#num-shops').text(numShops);
+    });
+}
+// =====================================================================================================================
+//                                                     Shops Page
 // =====================================================================================================================
 function loadShops() {
     $('.shop-list').off('click').on('click', '.list-item', function () {
@@ -160,16 +182,16 @@ function loadPreview() {
     });
 
     $('#item-to-cart').off('click').on('click', function(){
-        console.log(curUser);
         if (curUser) {
-            index = containsObject(item, curOrder);
+            index = searchItem(item.id, curOrder);
             if (typeof index == "boolean") {
                 item.qty = $('.qty-btns').find('input').val();
                 curOrder.push(item);
             } else {
                 curOrder[index].qty = $('.qty-btns').find('input').val();
             }
-            console.log(curOrder);
+            localStorage.setItem('curOrder', JSON.stringify(curOrder));
+            window.location.href = './cart.html';
         }else{
             window.location.href = './login.html';
         }
@@ -179,7 +201,43 @@ function loadPreview() {
 //                                                     Cart Page
 // =====================================================================================================================
 function loadCart() {
-    console.log(`Current File Name Is ${page}`)
+    if (curOrder.length > 0) {
+        let orderTotal = 0;
+        curOrder.forEach((orderItem)=>{
+            let subTotal = orderItem.qty * orderItem.price;
+            orderTotal += subTotal;
+            html = `<div class="tb-row">
+                        <div class="item-name tb-item">
+                            <div class="img-container"><img src="./img/bg_image.jpg" alt=""></div>
+                            <p>${orderItem.desc}
+                            </p>
+                        </div>
+                        <div class="tb-item">
+                            <p class="unit-price">R${orderItem.price}</p>
+                        </div>
+                        <div class="tb-item">
+                            <div class="qty-btns">
+                                <button class="decrease-qty">&minus;</button>
+                                <input type="number" name="quantity" id="" min="1" value="${orderItem.qty}">
+                                <button class="increase-qty">&plus;</button>
+                            </div>
+                        </div>
+                        <div class="tb-item">
+                            <h4 class="row-total">R${subTotal}</h4>
+                        </div>
+                    </div>`
+            $('#cart-items-div').append(html)
+        });
+        $('#num-items').text(`${curOrder.length} items`);
+        $('#c-sub-total').text(`R${orderTotal}`);
+        $('#cart-total').text(`R${orderTotal}`);
+    }
+}
+// =====================================================================================================================
+//                                                     Checkout Page
+// =====================================================================================================================
+function loadCheckout() {
+    //Checkout
 }
 // =====================================================================================================================
 //                                                     Driver Page
@@ -329,6 +387,15 @@ function containsObject(obj, list) {
         }
     }
     return false;
+}
+
+function searchItem(idKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].id === idKey) {
+            return i;
+        }
+    }
+    return false
 }
 
 function getShopLogoTo(shop, imgId) {

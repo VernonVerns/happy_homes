@@ -81,55 +81,15 @@
                 </div>
 
                 <!-- Items of the table start here -->
-                <div class="tb-row">
-                    <div class="item-name tb-item">
-                        <div class="img-container"><img src="./img/bg_image.jpg" alt=""></div>
-                        <p>Island 5,128km square, East of Madagascar + free ship 123.4m (26 Guests in cabins) built
-                            2008.
-                        </p>
-                    </div>
-                    <div class="tb-item">
-                        <p class="unit-price">R834,000,000,000.00</p>
-                    </div>
-                    <div class="tb-item">
-                        <div class="qty-btns">
-                            <button class="decrease-qty">&minus;</button>
-                            <input type="number" name="quantity" id="" min="1" value="1">
-                            <button class="increase-qty">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="tb-item">
-                        <h4 class="row-total">R834,000,000,000.00</h4>
-                    </div>
+                <div id="cart-items-div">
+                    <!-- cart Items loaded here... Do Not Delete -->
                 </div>
-
-                <div class="tb-row">
-                    <div class="item-name tb-item">
-                        <div class="img-container"><img src="./img/bg_image.jpg" alt=""></div>
-                        <p>Something you can buy. I don't know what it is, but I am sure you will need it ;). Plus its
-                            cheap, you can afford it.
-                        </p>
-                    </div>
-                    <div class="tb-item">
-                        <p class="unit-price">R182.50</p>
-                    </div>
-                    <div class="tb-item">
-                        <div class="qty-btns">
-                            <button class="decrease-qty">&minus;</button>
-                            <input type="number" name="quantity" id="" min="1" value="2">
-                            <button class="increase-qty">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="tb-item">
-                        <h4 class="row-total">R365.00</h4>
-                    </div>
-                </div>
-
+                
                 <!-- This row is for the total of item in are in there cart -->
                 <div class="tb-row total-items">
                     <div class="tb-item"></div>
                     <div class="tb-item">Total items</div>
-                    <div class="tb-item">3 items</div>
+                    <div class="tb-item" id="num-items">0 items</div>
                     <div class="tb-item"></div>
                 </div>
 
@@ -137,7 +97,7 @@
                 <div class="tb-row sub-total-price">
                     <div class="tb-item sub-total">Sub Total</div>
                     <div class="tb-item">
-                        <h3 class="price">R834,000,000,365.00</h3>
+                        <h3 class="price" id="c-sub-total">R00.00</h3>
                     </div>
                 </div>
 
@@ -145,7 +105,7 @@
                 <div class="tb-row total-price">
                     <div class="tb-item total">Total</div>
                     <div class="tb-item">
-                        <h3 class="price">R834,000,000,365.00</h3>
+                        <h3 class="price" id="cart-total">R00.00</h3>
                     </div>
                 </div>
             </div>
@@ -157,6 +117,9 @@
             </div>
         </div>
     </div>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

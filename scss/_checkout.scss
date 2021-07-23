@@ -113,6 +113,7 @@
 
         #login_page {
             margin-top: 30px;
+            padding-bottom: 50px;
 
             h1 {
                 font-size: 25px;
@@ -124,7 +125,7 @@
             margin-top: 30px;
             padding-bottom: 50px;
 
-             h1 {
+            h1 {
                 font-size: 25px;
                 margin-bottom: 20px;
             }
@@ -137,6 +138,7 @@
 
         #instructions {
             margin-top: 30px;
+            padding-bottom: 50px;
 
             h1 {
                 font-size: 25px;
@@ -151,19 +153,86 @@
 
         #payment {
             margin-top: 30px;
+            padding-bottom: 50px;
 
             h1 {
                 font-size: 25px;
                 margin-bottom: 20px;
             }
-        }
 
-        #review {
-            margin-top: 30px;
+            .client-details {
+                margin-bottom: 30px;
 
-            h1 {
-                font-size: 25px;
-                margin-bottom: 20px;
+                h4 {
+                    font-size: 20px;
+
+                    &.total-items {
+                        margin-top: 30px;
+                    }
+                }
+            }
+
+            .order-summary {
+                .summary-row {
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    grid-template-rows: auto;
+                    align-items: center;
+                    border-bottom: 1px solid #e6e6e6;
+                    padding: 1em;
+
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+
+                    .item-1 {
+                        justify-self: left;
+                    }
+
+                    .item-2 {
+                        justify-self: right;
+                    }
+
+                    h4, h1 {
+                        margin: 0 !important;
+                    }
+
+                    &.total {
+                        h1 {
+                            font-size: 25px;
+                            font-weight: 700;
+                        }
+                    }
+                } 
+            }
+
+            p {
+                margin-top: 20px;
+                margin-bottom: 40px;
+                color: #b3b3b3;
+            }
+
+            a.proceed-payment {
+                display: grid;
+                grid-template-columns: auto auto;
+                grid-template-rows: auto;
+                background-color: $secondary-color;
+                min-width: 60% !important;
+                padding: 0.8em;
+                border-radius: 15px;
+                color: $white-color;
+                transition: $transition;
+
+                span {
+                    justify-self: right;
+                    font-weight: 700;
+                }
+
+                &:hover {
+                    transform: scale(0.98);
+                    transition: $transition;
+                    color: $white-color;
+                }
             }
         }
     }

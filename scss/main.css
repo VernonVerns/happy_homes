@@ -738,6 +738,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #checkout_page .hh-container #login_page {
   margin-top: 30px;
+  padding-bottom: 50px;
 }
 
 #checkout_page .hh-container #login_page h1 {
@@ -762,6 +763,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #checkout_page .hh-container #instructions {
   margin-top: 30px;
+  padding-bottom: 50px;
 }
 
 #checkout_page .hh-container #instructions h1 {
@@ -776,6 +778,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #checkout_page .hh-container #payment {
   margin-top: 30px;
+  padding-bottom: 50px;
 }
 
 #checkout_page .hh-container #payment h1 {
@@ -783,13 +786,89 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 20px;
 }
 
-#checkout_page .hh-container #review {
+#checkout_page .hh-container #payment .client-details {
+  margin-bottom: 30px;
+}
+
+#checkout_page .hh-container #payment .client-details h4 {
+  font-size: 20px;
+}
+
+#checkout_page .hh-container #payment .client-details h4.total-items {
   margin-top: 30px;
 }
 
-#checkout_page .hh-container #review h1 {
+#checkout_page .hh-container #payment .order-summary .summary-row {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 1em;
+}
+
+#checkout_page .hh-container #payment .order-summary .summary-row:last-child {
+  border-bottom: 0;
+}
+
+#checkout_page .hh-container #payment .order-summary .summary-row .item-1 {
+  -ms-grid-column-align: left;
+      justify-self: left;
+}
+
+#checkout_page .hh-container #payment .order-summary .summary-row .item-2 {
+  -ms-grid-column-align: right;
+      justify-self: right;
+}
+
+#checkout_page .hh-container #payment .order-summary .summary-row h4, #checkout_page .hh-container #payment .order-summary .summary-row h1 {
+  margin: 0 !important;
+}
+
+#checkout_page .hh-container #payment .order-summary .summary-row.total h1 {
   font-size: 25px;
-  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+#checkout_page .hh-container #payment p {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  color: #b3b3b3;
+}
+
+#checkout_page .hh-container #payment a.proceed-payment {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  background-color: #26001b;
+  min-width: 60% !important;
+  padding: 0.8em;
+  border-radius: 15px;
+  color: #fff;
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+}
+
+#checkout_page .hh-container #payment a.proceed-payment span {
+  -ms-grid-column-align: right;
+      justify-self: right;
+  font-weight: 700;
+}
+
+#checkout_page .hh-container #payment a.proceed-payment:hover {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transition: all 0.55s ease;
+  transition: all 0.55s ease;
+  color: #fff;
 }
 
 #driver_portal {

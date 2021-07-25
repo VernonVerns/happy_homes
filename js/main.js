@@ -36,48 +36,48 @@ function initialise() {
     }else{
         curOrder = []
     }
-
-    var url = window.location.href.split("/");
-    page = url[url.length - 1].trim();
-    switch (page) {
-        case "index.html":
-            loadHome();
-            break;
-        case "shops.html":
-            loadShops();
-            break;
-        case "driverPage.html":
-            loadDriver();
-            break;
-        case "packerPage.html":
-            loadPacker();
-            break;
-        case "items.html":
-            loadShop();
-            break;
-        case "preview.html":
-            loadPreview();
-            break;
-        case "cart.html":
-            loadCart();
-            break;
-        case "cart.html":
-            loadCart();
-            break;
-        case "checkout.html":
-            loadCheckout();
-            break;
-        case "login.html":
-            loadLogin();
-            break;
-        default:
-            window.location.href = "index.html";
-            break;
-    }
-    
+    Loader(true);
     firebase.auth().onAuthStateChanged((user) => {
+        Loader(false);
         if (user) {
             curUser = user;
+        }
+        var url = window.location.href.split("/");
+        page = url[url.length - 1].trim();
+        switch (page) {
+            case "index.html":
+                loadHome();
+                break;
+            case "shops.html":
+                loadShops();
+                break;
+            case "driverPage.html":
+                loadDriver();
+                break;
+            case "packerPage.html":
+                loadPacker();
+                break;
+            case "items.html":
+                loadShop();
+                break;
+            case "preview.html":
+                loadPreview();
+                break;
+            case "cart.html":
+                loadCart();
+                break;
+            case "cart.html":
+                loadCart();
+                break;
+            case "checkout.html":
+                loadCheckout();
+                break;
+            case "login.html":
+                loadLogin();
+                break;
+            default:
+                window.location.href = "index.html";
+                break;
         }
     });
 }
@@ -237,7 +237,235 @@ function loadCart() {
 //                                                     Checkout Page
 // =====================================================================================================================
 function loadCheckout() {
-    //Checkout
+    let autocomplete;
+    let addressField;
+    let address1Field;
+    let address2Field;
+    let postalField;
+    let userInfo;
+    initAutocomplete();
+
+    function initAutocomplete() {
+        addressField = document.querySelector("input[name=street_address]");
+        address1Field = document.querySelector("input[name=str_name_address]");
+        address2Field = document.querySelector("input[name=suburb_address]");
+        postalField = document.querySelector("input[name=postal_code_address]");
+        // Create the autocomplete object, restricting the search predictions to
+        // addresses in South Africa.
+        autocomplete = new google.maps.places.Autocomplete(addressField, {
+            componentRestrictions: { country: ["za"] },
+            fields: ["address_components", "place_id"],
+            types: ["address"],
+        });
+        addressField.focus();
+        // When the user selects an address from the drop-down, populate the
+        // address fields in the form.
+        autocomplete.addListener("place_changed", fillInAddress);
+    }
+
+    function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        const place = autocomplete.getPlace();
+        let address1 = "";
+        let postcode = "";
+
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        for (const component of place.address_components) {
+            const componentType = component.types[0];
+
+            switch (componentType) {
+                case "street_number": {
+                    addressField.value = `${component.long_name}`;
+                    break;
+                }
+                case "route": {
+                    address1 += component.short_name;
+                    break;
+                }
+                case "postal_code": {
+                    postcode = `${component.long_name}${postcode}`;
+                    break;
+                }
+                case "postal_code_suffix": {
+                    postcode = `${postcode}-${component.long_name}`;
+                    break;
+                }
+                case "sublocality_level_1":
+                    address2Field.value = component.long_name;
+                    break;
+                case "locality":
+                    // document.querySelector("#locality").value = component.long_name;
+                    break;
+                case "administrative_area_level_1": {
+                    // document.querySelector("#state").value = component.short_name;
+                    break;
+                }
+            }
+        }
+        address1Field.value = address1;
+        postalField.value = postcode;
+        // After filling the form with address components from the Autocomplete
+        // prediction, set cursor focus on the second address line to encourage
+        // entry of subpremise information such as apartment, unit, or floor number.
+        $('input[name=company_name]').focus();
+    }
+
+    let tabs  = $('#c-o-tabs').find('a');
+    $(function(){     
+        var d = new Date(),        
+            h = d.getHours(),
+            m = d.getMinutes();
+        if(h < 10) h = '0' + h; 
+        if(m < 10) m = '0' + m; 
+        $('input[type="time"][value="now"]').each(function(){ 
+          $(this).attr({'value': h + ':' + m});
+        });
+    });
+    $('.next-btn').off('click').on('click', function(e){
+        e.preventDefault();
+        nextTab();
+    });
+
+    if (curUser) {
+        showTab('Delivery Address');
+        UsersRef.doc(curUser.email).get().then((doc)=>{
+            data = doc.data();
+            data.id = doc.id;
+            $('input[name=fname]').val(data.firstName);
+            $('input[name=surname]').val(data.lastName);
+            $('input[name=contact]').val(data.phone);
+        }).catch((err)=>{
+            console.log(err);
+        });
+    }else{
+        showTab('Login');
+    }
+
+    function saveData() {
+        let fname = $('input[name=fname]').val();
+        let surname = $('input[name=surname]').val();
+        let phone = $('input[name=contact]').val();
+        let altPhone = $('input[name=alt_contact]').val();
+        let complex = $('input[name=complex_address]').val();
+        let unitNo = $('input[name=unit_address]').val();
+        let streetName = $('input[name=str_name_address]').val();
+        let streetAddress = $('input[name=street_address]').val();
+        let suburb = $('input[name=suburb_address]').val();
+        let postalCode = $('input[name=postal_code_address]').val();
+        let company = $('input[name=company_name]').val();
+        let vatNo = $('input[name=vat_number]').val();
+        userInfo = {'fname': fname,
+            'surname': surname,
+            'phone': phone,
+            'altPhone': altPhone,
+            'complex': complex,
+            'unitNo': unitNo,
+            'streetAddress': streetAddress,
+            'streetName': streetName,
+            'suburb': suburb,
+            'postalCode': postalCode,
+            'company': company,
+            'vatNo': vatNo
+        }
+        console.log(curOrder);
+    }
+
+    function dataValidation(tab) {
+        switch (tab) {
+            case 'Login':
+                return validateUser();
+            case 'Delivery Address':
+                return validateAddress();
+            case 'Instruction':
+                return setUpReview();
+            default:
+                return false
+        }
+
+        function validateUser() {
+            // Validate User Info e.g. email and phone
+        }
+
+        function validateAddress() {
+            let fname = $('input[name=fname]').val();
+            let surname = $('input[name=surname]').val();
+            let phone = $('input[name=contact]').val();
+            let streetName = $('input[name=str_name_address]').val();
+            let streetAddress = $('input[name=street_address]').val();
+            let suburb = $('input[name=suburb_address]').val();
+            let postalCode = $('input[name=postal_code_address]').val();
+            if (fname.length < 3) {
+                $('input[name=fname]').focus();
+                return false;
+            }
+            if (surname.length < 3) {
+                $('input[name=surname]').focus();
+                return false;
+            }
+            if (phone.length < 3) {
+                $('input[name=contact]').focus();
+                return false;
+            }
+            if (streetAddress.length < 1) {
+                $('input[name=street_address]').focus();
+                return false;
+            }
+            if (streetName.length < 2) {
+                $('input[name=str_name_address]').focus();
+                return false;
+            }
+            if (suburb.length < 3) {
+                $('input[name=postal_code_address]').focus();
+                return false;
+            }
+            if (postalCode.length < 3) {
+                $('input[name=suburb_address]').focus();
+                return false;
+            }
+            return true;
+        }
+
+        function setUpReview() {
+            saveData();
+            let subTot = 0;
+            let charges = 35;
+            for (let index = 0; index < curOrder.length; index++) {
+                const el = curOrder[index];
+                let sub = el.qty * el.price;
+                subTot += sub;
+            }
+            let total = subTot + charges;
+            $('#rev_name').text(`${userInfo.fname} ${userInfo.surname}`);
+            $('#rev_cell').text(userInfo.phone);
+            $('#rev_alt_cell').text(userInfo.altPhone);
+            $('#rev_address').text(`${userInfo.complex} ${userInfo.unitNo} ${userInfo.streetAddress} ${userInfo.streetName}, ${userInfo.suburb} ${userInfo.postalCode}`);
+            $('#rev_t_items').text(`Total Items: ${curOrder.length} Items`);
+            $('#rev_sub').text(`R${subTot}`);
+            $('#rev_charges').text(`R${charges}`);
+            $('#rev_total').text(`R${total}`);
+            $('#pay_amount').text(`R${total}`);
+            return true;
+        }
+    }
+
+    function nextTab() {
+        let next_tab = $('.nav-tabs li a.active').closest('li').next('li').find('a');
+        let cur_tab = $('.nav-tabs li a.active').text();
+        if (dataValidation(cur_tab)) {
+            showTab($(next_tab).text());
+        }
+    }
+
+    function showTab(tab) {
+        for (let index = 0; index < tabs.length; index++) {
+            const mTab = tabs[index];
+            if ($(mTab).text() == tab) {
+                $(mTab).removeClass('disabled');
+                $(mTab).tab('show');
+            }
+        }
+    }
 }
 // =====================================================================================================================
 //                                                     Driver Page
@@ -411,7 +639,7 @@ function getShopLogoTo(shop, imgId) {
 
 function loadSriptMap() {
     var script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCjruLQSZNI2_2zYo_q3HgVzhEXvVeiyhg&callback=initMap';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCjruLQSZNI2_2zYo_q3HgVzhEXvVeiyhg';
     script.async = true;
 
     window.initMap = function() {
@@ -422,12 +650,14 @@ function loadSriptMap() {
 }
 
 function loadFirebaseScripts() {
+    // loadSriptMap();
     var scripts = ["https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"
                     ,'https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js'
                     ,'https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js'
                     ,'https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js'
+                    ,"https://maps.googleapis.com/maps/api/js?key=AIzaSyCjruLQSZNI2_2zYo_q3HgVzhEXvVeiyhg&libraries=places"
                 ]
-    loadScripts(scripts, initialise)
+    loadScripts(scripts, initialise);
 }
 
 function loadScripts(array,callback){  
@@ -450,3 +680,48 @@ function loadScripts(array,callback){
         }  
     })();  
 } 
+
+function Loader(start) {
+    var loaderHtml = '<div id="loader"><div></div><h4 id="progress"></h4></div>';
+	if ($('body').find('#loader').length == 0) {
+		$('body').append(loaderHtml);
+	}
+    if (start) {
+        $("#loader").addClass("loader");
+    } else {
+        $("#loader").removeClass("loader");
+    }
+}
+
+function initMap() {
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 7,
+      center: { lat: 41.85, lng: -87.65 },
+    });
+    directionsRenderer.setMap(map);
+  
+    const onChangeHandler = function () {
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+    };
+    document.getElementById("start").addEventListener("change", onChangeHandler);
+    document.getElementById("end").addEventListener("change", onChangeHandler);
+}
+  
+function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    directionsService
+      .route({
+        origin: {
+          query: document.getElementById("start").value,
+        },
+        destination: {
+          query: document.getElementById("end").value,
+        },
+        travelMode: google.maps.TravelMode.DRIVING,
+      })
+      .then((response) => {
+        directionsRenderer.setDirections(response);
+      })
+      .catch((e) => window.alert("Directions request failed due to " + status));
+}

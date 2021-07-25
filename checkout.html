@@ -72,7 +72,7 @@
 
     <div id="checkout_page">
         <div class="hh-container">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
+            <ul class="nav nav-tabs nav-justified" id="c-o-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#login_page">Login</a>
                 </li>
@@ -145,7 +145,7 @@
                                         <label for="unit_address">Unit Number (optional)</label>
                                         <input type="text" name="unit_address" placeholder="Unit Number">
                                         <label for="street_address">Street Number</label>
-                                        <input type="number" name="street_address" placeholder="Street Number">
+                                        <input type="text" name="street_address" placeholder="Street Number">
                                         <label for="suburb_address">Suburb Name</label>
                                         <input type="text" name="suburb_address" placeholder="Suburb Name">
                                     </div>
@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
 
-                                <button class="hh-btn">
+                                <button class="hh-btn next-btn">
                                     Next Step
                                 </button>
                             </form>
@@ -189,7 +189,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="delivery_time">Delivery Time</label>
-                                        <input type="time" name="delivery_time" value="">
+                                        <input type="time" name="delivery_time" value="now">
                                     </div>
                                     <div class="col-sm-12">
                                         <label for="message">Special Instruction or Note</label>
@@ -197,7 +197,7 @@
                                     </div>
                                 </div>
 
-                                <button class="hh-btn">
+                                <button class="hh-btn next-btn">
                                     Next Step
                                 </button>
                             </form>
@@ -209,24 +209,24 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="client-details">
-                                <h4>Name: <span>Simamkele Ndabeni</span></h4>
-                                <h4>Contact: <span>0838969792</span></h4>
-                                <h4>Alternative Number: <span></span></h4>
-                                <h4>Address: <span>114B Murray Street</span></h4>
-                                <h4 class="total-items">Total Items: 37 Items</h4>
+                                <h4>Name: <span id="rev_name">Simamkele Ndabeni</span></h4>
+                                <h4>Contact: <span id="rev_cell">0838969792</span></h4>
+                                <h4>Alternative Number: <span id="rev_alt_cell"></span></h4>
+                                <h4>Address: <span id="rev_address">114B Murray Street</span></h4>
+                                <h4 class="total-items" id="rev_t_items">Total Items: 37 Items</h4>
                             </div>
                             <div class="order-summary">
                                 <div class="subtotal summary-row">
                                     <h4 class="item-1">Subtotal</h4>
-                                    <h4 class="item-2">R345.87</h4>
+                                    <h4 class="item-2" id="rev_sub">R345.87</h4>
                                 </div>
                                 <div class="charges summary-row">
                                     <h4 class="item-1">Charges (Packing and Delivery)</h4>
-                                    <h4 class="item-2">R200.00</h4>
+                                    <h4 class="item-2" id="rev_charges">R200.00</h4>
                                 </div>
                                 <div class="total summary-row">
                                     <h1 class="item-1">Total</h1>
-                                    <h1 class="item-2">R545.87</h1>
+                                    <h1 class="item-2" id="rev_total">R545.87</h1>
                                 </div>
                             </div>
 
@@ -241,7 +241,7 @@
                                     <a href="http://" target="_blank" rel="noopener noreferrer"
                                         class="proceed-payment">Proceed to
                                         Payment
-                                        <span>R545.87</span></a>
+                                        <span id="pay_amount">R545.87</span></a>
                                 </div>
                             </div>
                         </div>

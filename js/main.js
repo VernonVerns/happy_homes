@@ -237,13 +237,89 @@ function loadCart() {
 //                                                     Checkout Page
 // =====================================================================================================================
 function loadCheckout() {
+    if (curOrder.length < 1) {
+        showErr('Cart is Enpty', 'Please Add Some Items In The Cart Before Checking Out');
+        window.replace('./home.html')
+    }
     let autocomplete;
     let addressField;
     let address1Field;
     let address2Field;
     let postalField;
-    let userInfo;
+    let coordinates;
+    let userInfo = {};
+    let tabs  = $('#c-o-tabs').find('a');
     initAutocomplete();
+
+    $('#c-o-tabs').off('click').on('click', 'a', function(e){
+        e.preventDefault();
+    });
+
+    if (curUser) {
+        for (let index = 0; index < tabs.length; index++) {
+            const mTab = tabs[index];
+            if ($(mTab).text() == 'Login') {
+                $(mTab).addClass('disabled');
+                showTab('Delivery Address');
+            }
+        }
+        UsersRef.doc(curUser.email).get().then((doc)=>{
+            data = doc.data();
+            data.id = doc.id;
+            $('input[name=fname]').val(data.firstName);
+            $('input[name=surname]').val(data.lastName);
+            $('input[name=contact]').val(data.phone);
+        }).catch((err)=>{
+            console.log(err);
+        });
+    }else{
+        showTab('Login');
+    }
+
+    $('.next-btn').off('click').on('click', function(e){
+        e.preventDefault();
+        nextTab();
+    });
+
+    $('#gLoginBtn').off('click').on('click', function(){
+        let email = $('input[name=gEmail]').val();
+        if (!isEmail(email)) {
+            showErr('Invalid Email', 'Please Enter A Valid Email Address')
+            return
+        }
+        userInfo.email = email;
+        showTab('Delivery Address');
+    });
+
+    $('#loginBtn').off('click').on('click', function(){
+        let email = $('input[name=gEmail]').val();
+        let password = $('input[name=password]').val();
+        if (!isEmail(email)) {
+            showErr('Login Failed', 'Please Enter A Valid Email Address')
+            return
+        }
+        auth.signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                uuserInfo.email = email;
+                showTab('Delivery Address');
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                switch (errorCode) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'Account Not Found, Please Register An Account Before You Can Login'
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Invalid Email or Password'
+                        break;
+                    default:
+                        errorMessage = 'Login Failed, Please Try Again Later'
+                        break;
+                }
+                showErr(`${errorCode}: ${errorMessage}`)
+            });
+    });
 
     function initAutocomplete() {
         addressField = document.querySelector("input[name=street_address]");
@@ -254,7 +330,7 @@ function loadCheckout() {
         // addresses in South Africa.
         autocomplete = new google.maps.places.Autocomplete(addressField, {
             componentRestrictions: { country: ["za"] },
-            fields: ["address_components", "place_id"],
+            fields: ["address_components", 'geometry'],
             types: ["address"],
         });
         addressField.focus();
@@ -268,6 +344,8 @@ function loadCheckout() {
         const place = autocomplete.getPlace();
         let address1 = "";
         let postcode = "";
+        let location = place.geometry.location;
+        coordinates = {lat: location.lat(), lng: location.lng()}
 
         // Get each component of the address from the place details,
         // and then fill-in the corresponding field on the form.
@@ -311,37 +389,6 @@ function loadCheckout() {
         $('input[name=company_name]').focus();
     }
 
-    let tabs  = $('#c-o-tabs').find('a');
-    $(function(){     
-        var d = new Date(),        
-            h = d.getHours(),
-            m = d.getMinutes();
-        if(h < 10) h = '0' + h; 
-        if(m < 10) m = '0' + m; 
-        $('input[type="time"][value="now"]').each(function(){ 
-          $(this).attr({'value': h + ':' + m});
-        });
-    });
-    $('.next-btn').off('click').on('click', function(e){
-        e.preventDefault();
-        nextTab();
-    });
-
-    if (curUser) {
-        showTab('Delivery Address');
-        UsersRef.doc(curUser.email).get().then((doc)=>{
-            data = doc.data();
-            data.id = doc.id;
-            $('input[name=fname]').val(data.firstName);
-            $('input[name=surname]').val(data.lastName);
-            $('input[name=contact]').val(data.phone);
-        }).catch((err)=>{
-            console.log(err);
-        });
-    }else{
-        showTab('Login');
-    }
-
     function saveData() {
         let fname = $('input[name=fname]').val();
         let surname = $('input[name=surname]').val();
@@ -355,7 +402,7 @@ function loadCheckout() {
         let postalCode = $('input[name=postal_code_address]').val();
         let company = $('input[name=company_name]').val();
         let vatNo = $('input[name=vat_number]').val();
-        userInfo = {'fname': fname,
+        let user = {'fname': fname,
             'surname': surname,
             'phone': phone,
             'altPhone': altPhone,
@@ -368,23 +415,23 @@ function loadCheckout() {
             'company': company,
             'vatNo': vatNo
         }
-        console.log(curOrder);
+        for (const key in user) {
+            if (user.hasOwnProperty.call(user, key)) {
+                const el = user[key];
+                userInfo[key] = el
+            }
+        }
     }
 
     function dataValidation(tab) {
         switch (tab) {
-            case 'Login':
-                return validateUser();
             case 'Delivery Address':
                 return validateAddress();
             case 'Instruction':
-                return setUpReview();
+                let origin = { lat: -33.0217858, lng: 27.9048975 };
+                return calcDistance(origin, coordinates);
             default:
                 return false
-        }
-
-        function validateUser() {
-            // Validate User Info e.g. email and phone
         }
 
         function validateAddress() {
@@ -426,10 +473,32 @@ function loadCheckout() {
             return true;
         }
 
+        function calcDistance(origin, destination) {
+            const service = new google.maps.DistanceMatrixService();
+            const request = {
+                origins: [origin],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.DRIVING,
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false,
+            };
+            service.getDistanceMatrix(request).then((response)=>{
+                let value = response.rows[0].elements[0].distance.value
+                if(value<5000){
+                    value = 5;
+                }else{
+                    value = Math.round(value/1000);
+                }
+                $('#rev_charges').text(`R${calcCharges(value)}`);
+            })
+            return setUpReview();
+        }
+
         function setUpReview() {
             saveData();
             let subTot = 0;
-            let charges = 35;
+            let charges = 45;
             for (let index = 0; index < curOrder.length; index++) {
                 const el = curOrder[index];
                 let sub = el.qty * el.price;
@@ -446,6 +515,12 @@ function loadCheckout() {
             $('#rev_total').text(`R${total}`);
             $('#pay_amount').text(`R${total}`);
             return true;
+        }
+
+        function calcCharges(distance) {
+            let booking = 10;
+            let kmFee = 7;
+            return ((kmFee * distance) + booking)
         }
     }
 
@@ -464,6 +539,18 @@ function loadCheckout() {
                 $(mTab).removeClass('disabled');
                 $(mTab).tab('show');
             }
+        }
+        if (tab == 'Instruction') {
+            $(function(){     
+                var d = new Date(),        
+                    h = d.getHours(),
+                    m = d.getMinutes();
+                if(h < 10) h = '0' + h; 
+                if(m < 10) m = '0' + m; 
+                $('input[type="time"]').each(function(){ 
+                $(this).attr({'value': h + ':' + m});
+                });
+            });
         }
     }
 }

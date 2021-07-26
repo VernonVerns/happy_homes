@@ -30,10 +30,10 @@
                     <a class="nav-link" href="./login.html"><i class="ti ti-user"></i> Login / Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="ti ti-shopping-cart"></i> Cart (4)</a>
+                    <a class="nav-link" href="./cart.html"><i class="ti ti-shopping-cart"></i> Cart (4)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="ti ti-shopping-cart-full"></i> Checkout</a>
+                    <a class="nav-link" href="./checkout.html"><i class="ti ti-shopping-cart-full"></i> Checkout</a>
                 </li>
             </ul>
         </div>
@@ -74,16 +74,16 @@
         <div class="hh-container">
             <ul class="nav nav-tabs nav-justified" id="c-o-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#login_page">Login</a>
+                    <a class="nav-link active" href="#login_page">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#address">Delivery Address</a>
+                    <a class="nav-link" href="#address">Delivery Address</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#instructions">Instruction</a>
+                    <a class="nav-link" href="#instructions">Instruction</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#payment">Payment</a>
+                    <a class="nav-link" href="#payment">Payment</a>
                 </li>
             </ul>
 
@@ -108,11 +108,11 @@
                             <h1>Guest Customer</h1>
                             <form>
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="loginEmail" placeholder="Email">
+                                <input type="email" name="gEmail" id="loginEmail" placeholder="Email">
 
                                 <div class="form-btns">
                                     <div></div> <!-- Don't delete, its balancing the space-->
-                                    <a id='loginBtn' class="hh-btn login-btn">Checkout as a guest</a>
+                                    <a id='gLoginBtn' class="hh-btn login-btn">Checkout as a guest</a>
                                 </div>
                             </form>
                         </div>
@@ -123,19 +123,6 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <form>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="title">Title</label>
-                                        <select name="title" id="title">
-                                            <option value="" selected disabled>- Select Title -</option>
-                                            <option value="">Ms.</option>
-                                            <option value="">Mr.</option>
-                                            <option value="">Mrs.</option>
-                                            <option value="">Dr.</option>
-                                            <option value="">Rev.</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="fname">First Name</label>
@@ -163,17 +150,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="company_name">Company Name (optinal)</label>
-                                        <input type="text" name="company_name" placeholder="Company Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="vat_number">VAT Number (optional)</label>
-                                        <input type="number" name="vat_number" placeholder="VAT Number">
-                                    </div>
-                                </div>
-
                                 <button class="hh-btn next-btn">
                                     Next Step
                                 </button>
@@ -189,7 +165,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="delivery_time">Delivery Time</label>
-                                        <input type="time" name="delivery_time" value="now">
+                                        <input type="time" name="delivery_time">
                                     </div>
                                     <div class="col-sm-12">
                                         <label for="message">Special Instruction or Note</label>
@@ -238,9 +214,8 @@
 
                             <div class="row">
                                 <div class="col-sm-6 ml-auto">
-                                    <a href="http://" target="_blank" rel="noopener noreferrer"
-                                        class="proceed-payment">Proceed to
-                                        Payment
+                                    <a href="https://pay.ozow.com/646a7e5b-6435-46a5-90dc-c4baecb32fa2/Secure" target="_blank" rel="noopener noreferrer"
+                                        class="proceed-payment">Proceed to Payment
                                         <span id="pay_amount">R545.87</span></a>
                                 </div>
                             </div>
